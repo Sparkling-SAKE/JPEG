@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="JPEG">
+      <UniqueIdentifier>{06c9e34e-f326-4029-aab3-94d55533ea03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JPEG\DCT">
+      <UniqueIdentifier>{906a79f8-391a-4764-9f31-5b32fabc7546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JPEG\Huffman">
+      <UniqueIdentifier>{c0184e3e-7413-4d7f-bc68-baeba48d568a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DCT.cpp">
+      <Filter>JPEG\DCT</Filter>
+    </ClCompile>
+    <ClCompile Include="JPEG.cpp">
+      <Filter>JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="Huffman.cpp">
+      <Filter>JPEG\Huffman</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DCT.h">
+      <Filter>JPEG\DCT</Filter>
+    </ClInclude>
+    <ClInclude Include="JPEG.h">
+      <Filter>JPEG</Filter>
+    </ClInclude>
+    <ClInclude Include="Huffman.h">
+      <Filter>JPEG\Huffman</Filter>
+    </ClInclude>
+    <ClInclude Include="BMPReader.h">
+      <Filter>JPEG</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
