@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="JPEG">
       <UniqueIdentifier>{06c9e34e-f326-4029-aab3-94d55533ea03}</UniqueIdentifier>
     </Filter>
@@ -17,6 +13,9 @@
     </Filter>
     <Filter Include="JPEG\Huffman">
       <UniqueIdentifier>{c0184e3e-7413-4d7f-bc68-baeba48d568a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bmp">
+      <UniqueIdentifier>{6d6209fa-c781-4b50-8c35-e3a764d6b11f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -32,6 +31,12 @@
     <ClCompile Include="Huffman.cpp">
       <Filter>JPEG\Huffman</Filter>
     </ClCompile>
+    <ClCompile Include="BmpManager.cpp">
+      <Filter>Bmp</Filter>
+    </ClCompile>
+    <ClCompile Include="BmpImage.cpp">
+      <Filter>Bmp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DCT.h">
@@ -43,8 +48,14 @@
     <ClInclude Include="Huffman.h">
       <Filter>JPEG\Huffman</Filter>
     </ClInclude>
-    <ClInclude Include="BMPReader.h">
-      <Filter>JPEG</Filter>
+    <ClInclude Include="BmpManager.h">
+      <Filter>Bmp</Filter>
+    </ClInclude>
+    <ClInclude Include="BmpImage.h">
+      <Filter>Bmp</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -139,16 +139,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BmpImage.cpp" />
+    <ClCompile Include="BmpManager.cpp" />
     <ClCompile Include="DCT.cpp" />
     <ClCompile Include="Huffman.cpp" />
     <ClCompile Include="JPEG.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BmpImage.h" />
+    <ClInclude Include="BmpManager.h" />
     <ClInclude Include="DCT.h" />
     <ClInclude Include="Huffman.h" />
     <ClInclude Include="JPEG.h" />
-    <ClInclude Include="BMPReader.h" />
+    <ClInclude Include="Types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,15 +1,12 @@
 
 #pragma once
 
+#include "Types.h"
+
 #include "DCT.h"
 #include "Huffman.h"
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include <utility>
-#include <fstream>
+class BmpImage;
 
 using namespace std;
 
@@ -27,29 +24,30 @@ private:
 public:
 	Jpeg() = delete;
 	Jpeg(vector<vector<int>>& pixel, int width, int height);
+	Jpeg(BmpImage* image) {}
 	~Jpeg() = default;
 
 public:
-	void				Compress();
-	void				Decompress();
+	void					Compress();
+	void					Decompress();
 
 public:
-	vector<vector<int>>& GetReconstructPixel() { return _decompressPixel; }
+	vector<vector<int>>&	GetReconstructPixel() { return _decompressPixel; }
 
 private:
-	void				Quantization(vector<vector<int>>& macroBlock);
-	void				InverseQuantization(vector<vector<int>>& macroBlock);
-	void				ZigZagScanning(vector<vector<int>>& macroBlock);
-	vector<vector<int>> InverseZigZagScanning(int dc, vector<pair<int, int>> ac);
-	void				Dpcm();
-	void				DcHuffman();
-	void				AcHuffman();
+	void					Quantization(vector<vector<int>>& macroBlock);
+	void					InverseQuantization(vector<vector<int>>& macroBlock);
+	void					ZigZagScanning(vector<vector<int>>& macroBlock);
+	vector<vector<int>>		InverseZigZagScanning(int dc, vector<pair<int, int>> ac);
+	void					Dpcm();
+	void					DcHuffman();
+	void					AcHuffman();
 
-	vector<vector<int>> SliceImage(int heightZeroIdx, int widthZeroIdx);
-	void				ReconstructImage(vector<vector<int>>& macroBlock, int heightZeroIdx, int widthZeroIdx);
+	vector<vector<int>>		SliceImage(int heightZeroIdx, int widthZeroIdx);
+	void					ReconstructImage(vector<vector<int>>& macroBlock, int heightZeroIdx, int widthZeroIdx);
 
-	void				ConvertByte2Bit();
-	void				ConvertBit2Byte();
+	void					ConvertByte2Bit();
+	void					ConvertBit2Byte();
 
 private:
 	Dct							_dct;

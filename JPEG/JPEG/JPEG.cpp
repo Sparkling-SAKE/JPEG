@@ -43,15 +43,24 @@ int Jpeg::ConvertBin2Dec(string bin)
 {
 	int dec = 0;
 	bool isNegative = false;
-	if (bin[0] == '0') {
+	if (bin[0] == '0')
+	{
 		isNegative = true;
-		for (int i = 0; i < bin.length(); ++i) {
-			if (bin[i] == '0')	bin[i] = '1';
-			else				bin[i] = '0'; }}
+		for (int i = 0; i < bin.length(); ++i)
+		{
+			if (bin[i] == '0')
+				bin[i] = '1';
+			else			
+				bin[i] = '0'; 
+		}
+	}
 	int power = 1;
-	for (int i = bin.length() - 1; i >= 0; --i) {
-		if (bin[i] == '1')		dec += power;
-		power *= 2; }
+	for (int i = bin.length() - 1; i >= 0; --i)
+	{
+		if (bin[i] == '1')		
+			dec += power;
+		power *= 2;
+	}
 
 	if (isNegative)		return dec * -1;
 	else				return dec;
