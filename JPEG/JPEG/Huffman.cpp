@@ -35,7 +35,7 @@ void Huffman::UpdateCode(DcNode* node, string code)
     if (node == nullptr)
         return;
     node->_code = code;
-    if (node->_symbol != INT_MAX)
+    if (node->_symbol != INT32_MAX)
     {
         if (code == "")
         {
@@ -82,7 +82,7 @@ void Huffman::DeleteNodes(DcNode* node)
     DeleteNodes(right);
 }
 
-void Huffman::HuffmanCoding(unordered_map<pair<int, int>, int, pair_hash>& ac)
+void Huffman::HuffmanCoding(unordered_map<pair<int32, int32>, int32, pair_hash>& ac)
 {
     priority_queue<AcNode*, vector<AcNode*>, AcNodeLess> acPriorityQueue;
     for (auto iter = ac.begin(); iter != ac.end(); ++iter)
@@ -112,7 +112,7 @@ void Huffman::HuffmanCoding(unordered_map<pair<int, int>, int, pair_hash>& ac)
     UpdateCode(_acTree, "");
 }
 
-void Huffman::HuffmanCoding(unordered_map<int, int>& dc)
+void Huffman::HuffmanCoding(unordered_map<int32, int32>& dc)
 {
     priority_queue<DcNode*, vector<DcNode*>, DcNodeLess> dcPriorityQueue;
     for (auto iter = dc.begin(); iter != dc.end(); ++iter)

@@ -4,17 +4,16 @@
 #include "BmpImage.h"
 #include "Types.h"
 
-int main()
+int32 main()
 {
 	BmpImage image;
-	BmpManager::ReadImage("Lena.bmp", OUT &image);
+	BmpManager::ReadImage("Lena.bmp", OUT image);
 
-	Jpeg jpeg(&image);
-
+	Jpeg jpeg(image);
 	jpeg.Compress();
-	jpeg.Decompress();
 
-	BmpManager::WriteImage("decompressed.bmp", OUT &image);
+	jpeg.Decompress();
+	BmpManager::WriteImage("decompressed.bmp", image);
 
 	return 0;
 }

@@ -24,8 +24,8 @@ public:
 	~BmpManager();
 
 public:
-	static void				ReadImage(string fileName, OUT BmpImage* image);
-	static void				WriteImage(string fileName, BmpImage* image);
+	static void				ReadImage(string fileName, OUT BmpImage& image);
+	static void				WriteImage(string fileName, BmpImage& image);
 	static void				Clear();
 
 private:

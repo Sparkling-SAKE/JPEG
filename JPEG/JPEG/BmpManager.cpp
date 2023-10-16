@@ -2,9 +2,9 @@
 #include "BmpManager.h"
 #include "BmpImage.h"
 
-string      _header = "";
-ifstream    _fin = {};
-ofstream    _fout = {};
+string      BmpManager::_header = "";
+ifstream    BmpManager::_fin = {};
+ofstream    BmpManager::_fout = {};
 
 BmpManager::~BmpManager()
 {
@@ -15,7 +15,7 @@ BmpManager::~BmpManager()
         _fout.close();
 }
 
-void BmpManager::ReadImage(string fileName, OUT BmpImage* image)
+void BmpManager::ReadImage(string fileName, OUT BmpImage& image)
 {
     Clear();
 
@@ -29,14 +29,14 @@ void BmpManager::ReadImage(string fileName, OUT BmpImage* image)
     _fin.read(reinterpret_cast<char*>(&lookUpTable), sizeof(lookUpTable));
     _fin.seekg(0, SEEK_SET);
 
-    int header = 0;
+    int32 header = 0;
     if (lookUpTable != 0)
         header = HEADER_SIZE + INFO_HEADER_SIZE + 1024;
     else
         header = HEADER_SIZE + INFO_HEADER_SIZE;
 
     // 원본 BMP 파일에서 헤더와 테이블 뽑아서 _header에 저장
-    for (int i = 0; i < header; i++) 
+    for (int32 i = 0; i < header; i++) 
         _header += _fin.get();
 
     int32 dataOffset; //데이터 시작 위치 주소값 
@@ -44,28 +44,28 @@ void BmpManager::ReadImage(string fileName, OUT BmpImage* image)
     _fin.read(reinterpret_cast<char*>(&dataOffset), sizeof(dataOffset));
 
     _fin.seekg(WIDTH_OFFSET, SEEK_SET);
-    _fin.read(reinterpret_cast<char*>(&image->_width), sizeof(image->_width));
+    _fin.read(reinterpret_cast<char*>(&(image._width)), sizeof(image._width));
 
     _fin.seekg(HEIGHT_OFFSET, SEEK_SET);
-    _fin.read(reinterpret_cast<char*>(&image->_height), sizeof(image->_height));
+    _fin.read(reinterpret_cast<char*>(&(image._height)), sizeof(image._height));
 
     int16 bitsPerPixel;
     _fin.seekg(BITS_PER_PIXEL_OFFSET, SEEK_SET);
     _fin.read(reinterpret_cast<char*>(&bitsPerPixel), sizeof(bitsPerPixel));
 
-    image->_bytesPerPixel = static_cast<int32>(bitsPerPixel / 8);
+    image._bytesPerPixel = static_cast<int32>(bitsPerPixel / 8);
 
-    int paddedRowSize = static_cast<int>((image->_width + 3) / 4) * 4 * image->_bytesPerPixel;
-    int unpaddedRowSize = image->_width * image->_bytesPerPixel;
-    int totalSize = unpaddedRowSize * image->_height;
+    int32 paddedRowSize = static_cast<int32>((image._width + 3) / 4) * 4 * image._bytesPerPixel;
+    int32 unpaddedRowSize = image._width * image._bytesPerPixel;
+    int32 totalSize = unpaddedRowSize * image._height;
 
-    vector<vector<byte>>& pixel = image->_pixel;
-    pixel.resize(image->_width);
-    for (vector<byte>& row : pixel)
-        row.resize(image->_height);
+    vector<vector<uint8>>& pixel = image._pixel;
+    pixel.resize(image._width);
+    for (vector<uint8>& row : pixel)
+        row.resize(image._height);
 
-    int size = pixel.size() - 1;
-    for (int i = 0; i < image->_height; ++i)
+    int32 size = pixel.size() - 1;
+    for (int32 i = 0; i < image._height; ++i)
     {
         _fin.seekg(dataOffset + (i * paddedRowSize), SEEK_SET);
         _fin.read(reinterpret_cast<char*>(&pixel[size - i][0]), unpaddedRowSize);
@@ -74,7 +74,7 @@ void BmpManager::ReadImage(string fileName, OUT BmpImage* image)
     return;
 }
 
-void BmpManager::WriteImage(string fileName, BmpImage* image)
+void BmpManager::WriteImage(string fileName, BmpImage& image)
 {
     _fout.open(fileName, std::ios::binary);
 
@@ -83,11 +83,11 @@ void BmpManager::WriteImage(string fileName, BmpImage* image)
     
     WriteHeader();
 
-    int paddedRowSize = static_cast<int>((image->_width + 3) / 4) * 4 * image->_bytesPerPixel;
+    int32 paddedRowSize = static_cast<int32>((image._width + 3) / 4) * 4 * image._bytesPerPixel;
 
-    int size = image->_pixel.size() - 1;
-    for (int i = 0; i < image->_height; ++i)
-        _fout.write(reinterpret_cast<const char*>(&image->_pixel[size - i][0]), paddedRowSize);
+    int32 size = image._pixel.size() - 1;
+    for (int32 i = 0; i < image._height; ++i)
+        _fout.write(reinterpret_cast<const char*>(&image._pixel[size - i][0]), paddedRowSize);
 }
 
 void BmpManager::Clear()
@@ -101,7 +101,7 @@ void BmpManager::Clear()
 
 void BmpManager::WriteHeader()
 {
-    for (int i = 0; i < _header.length(); ++i)
+    for (int32 i = 0; i < _header.length(); ++i)
         _fout.put(_header[i]);
 }
 

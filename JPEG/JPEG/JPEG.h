@@ -13,18 +13,18 @@ using namespace std;
 class Jpeg
 {
 private:
-	static vector<vector<int>>		LumaQuantizationTable;
-	static vector<int>				ZigzagIndexX;
-	static vector<int>				ZigzagIndexY;
-	static const int				BLOCK_SIZE = 8;
+	static vector<vector<int32>>		LumaQuantizationTable;
+	static vector<int32>				ZigzagIndexX;
+	static vector<int32>				ZigzagIndexY;
+	static const int32					BLOCK_SIZE = 8;
 	
-	static string					ConvertDec2Bin(int dec);
-	static int						ConvertBin2Dec(string bin);
+	static string					ConvertDec2Bin(int32 dec);
+	static int32					ConvertBin2Dec(string bin);
 
 public:
 	Jpeg() = delete;
-	Jpeg(vector<vector<int>>& pixel, int width, int height);
-	Jpeg(BmpImage* image) {}
+	Jpeg(vector<vector<uint8>>& pixel, int32 width, int32 height);
+	Jpeg(BmpImage& image);
 	~Jpeg() = default;
 
 public:
@@ -32,36 +32,36 @@ public:
 	void					Decompress();
 
 public:
-	vector<vector<int>>&	GetReconstructPixel() { return _decompressPixel; }
+	vector<vector<uint8>>&	GetReconstructPixel() { return _decompressPixel; }
 
 private:
-	void					Quantization(vector<vector<int>>& macroBlock);
-	void					InverseQuantization(vector<vector<int>>& macroBlock);
-	void					ZigZagScanning(vector<vector<int>>& macroBlock);
-	vector<vector<int>>		InverseZigZagScanning(int dc, vector<pair<int, int>> ac);
+	void					Quantization(vector<vector<int32>>& macroBlock);
+	void					InverseQuantization(vector<vector<int32>>& macroBlock);
+	void					ZigZagScanning(vector<vector<int32>>& macroBlock);
+	vector<vector<int32>>	InverseZigZagScanning(int32 dc, vector<pair<int32, int32>> ac);
 	void					Dpcm();
 	void					DcHuffman();
 	void					AcHuffman();
 
-	vector<vector<int>>		SliceImage(int heightZeroIdx, int widthZeroIdx);
-	void					ReconstructImage(vector<vector<int>>& macroBlock, int heightZeroIdx, int widthZeroIdx);
+	vector<vector<int32>>	SliceImage(int32 heightZeroIdx, int32 widthZeroIdx);
+	void					ReconstructImage(vector<vector<int32>>& macroBlock, int32 heightZeroIdx, int32 widthZeroIdx);
 
 	void					ConvertByte2Bit();
 	void					ConvertBit2Byte();
 
 private:
-	Dct							_dct;
-	Huffman						_acHuffman;
-	Huffman						_dcHuffman;
-	vector<int>					_dcVector;
-	vector<pair<int, int>>		_acRunLengthPair;		// pair <ZeroRun, value>
-	vector<pair<int, string>>   _dcRunLengthPair;		// pair <length,  value>
+	Dct								_dct;
+	Huffman							_acHuffman;
+	Huffman							_dcHuffman;
+	vector<int32>					_dcVector;
+	vector<pair<int32, int32>>		_acRunLengthPair;		// pair <ZeroRun, value>
+	vector<pair<int32, string>>		_dcRunLengthPair;		// pair <length,  value>
 
-	ofstream					_fout;
-	ifstream					_fin;
+	ofstream						_fout;
+	ifstream						_fin;
 	
-	vector<vector<int>>			_pixel;
-	vector<vector<int>>			_decompressPixel;
-	int							_imageWidth = 0;
-	int							_imageHeight = 0;
+	vector<vector<uint8>>&			_pixel;
+	vector<vector<uint8>>			_decompressPixel;
+	int32							_imageWidth = 0;
+	int32							_imageHeight = 0;
 };
